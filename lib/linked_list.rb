@@ -104,6 +104,28 @@ class LinkedList
     end
     '' # return a str, otherwise prints object reference
   end
+
+  # Extra Credit
+
+  def insert_at(value, index)
+    node = Node.new
+    node.value = value
+    before_node = at(index - 1)
+    after_node = at(index)
+    before_node.next_node = (node)
+    node.next_node = (after_node)
+  end
+
+  def remove_at(index)
+    node = head
+    count = 0
+    loop do
+      node = node.next_node
+      count += 1
+      break if count == (index - 1)
+    end
+    node.next_node = at(index + 1)
+  end
 end
 
 class Node

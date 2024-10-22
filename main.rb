@@ -20,3 +20,7 @@ puts list
 
 puts list.contains?('cat')
 puts list.find('cat')
+
+list.remove_at(3)
+list.insert_at('CAT', 3)
+puts list
