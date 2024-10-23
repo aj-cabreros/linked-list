@@ -14,6 +14,7 @@ class LinkedList
     if head.value.nil?
       self.head = node
       self.tail = node
+      head.next_node = tail
     else
       tail.next_node = node
       self.tail = node
@@ -24,7 +25,7 @@ class LinkedList
     node = Node.new
     node.value = value
     node.next_node = head
-    self.head = node
+    @head = node
   end
 
   def size
@@ -56,17 +57,24 @@ class LinkedList
   end
 
   def pop
-    node = head
-    node = node.next_node until node.next_node == tail
-    self.tail = (node)
-    node.next_node = nil
+    if head == tail
+      @head = nil
+      @tail = nil
+    else
+      node = head
+      node = node.next_node until node.nil? || node.next_node == tail
+      self.tail = (node)
+      node.next_node = nil
+    end
   end
 
   def contains?(value)
     node = head
+
     loop do
-      node = node.next_node
       break if node.nil? || node.value.eql?(value)
+
+      node = node.next_node
     end
     if node.nil?
       false
@@ -108,23 +116,44 @@ class LinkedList
   # Extra Credit
 
   def insert_at(value, index)
-    node = Node.new
-    node.value = value
-    before_node = at(index - 1)
-    after_node = at(index)
-    before_node.next_node = (node)
-    node.next_node = (after_node)
+    if index.negative? || index > size - 1
+      puts 'invalid index'
+    elsif index.zero?
+      prepend(value)
+    elsif index == size
+      append(value)
+    else
+      node = Node.new
+      node.value = value
+      before_node = at(index - 1)
+      after_node = at(index)
+      before_node.next_node = (node)
+      node.next_node = (after_node)
+    end
   end
 
   def remove_at(index)
-    node = head
-    count = 0
-    loop do
-      node = node.next_node
-      count += 1
-      break if count == (index - 1)
+    if index.negative? || index > size - 1
+      puts 'invalid index'
+    elsif index.zero?
+      shift
+    elsif at(index) == tail
+      pop
+    else
+      node = head
+      count = 0
+      loop do
+        break if node == tail || count == index - 1
+
+        node = node.next_node
+        count += 1
+      end
+      node.next_node = at(index + 1)
     end
-    node.next_node = at(index + 1)
+  end
+
+  def shift
+    @head = head.next_node
   end
 end
 
