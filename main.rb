@@ -32,15 +32,15 @@ list.append('cow')
 
 # ======= Test #prepend =======
 
-list.prepend('dog')
-list.prepend('cat')
-list.prepend('parrot')
-list.prepend('hamster')
-list.prepend('snake')
-list.prepend('turtle')
+# list.prepend('dog')
+# list.prepend('cat')
+# list.prepend('parrot')
+# list.prepend('hamster')
+# list.prepend('snake')
+# list.prepend('turtle')
 
-list.prepend('pig')
-list.prepend('cow')
+# list.prepend('pig')
+# list.prepend('cow')
 
 # append and prepend should mirror so index 7/8 head should be dog
 # p list.at(7) # returns node object reference
